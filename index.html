@@ -6,6 +6,11 @@
     <title>Cozy Living Room</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        body {
+            height: 100%;
+            overflow-y: scroll;
+            margin: 0;
+        }
         @keyframes gentle-pulse {
             0%, 100% {
                 transform: scale(1);
@@ -25,12 +30,92 @@
         .image-container:hover {
             transform: scale(1.05);
         }
+
+        #player {
+            width: 1px;
+            height: 1px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #play-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+
+        #play-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen w-screen overflow-hidden">
-    <div class="relative w-screen h-screen overflow-hidden shadow-2xl animate-gentle-pulse image-container">
-        <img src="KTCHAIR.png" alt="A woman sitting in a cozy living room reading a book." class="w-full h-full object-cover">
+<body class="bg-gray-100 flex items-center justify-center w-screen">
+    <div class="relative w-full h-full p-4 overflow-hidden animate-gentle-pulse image-container">
+        <img src="KTCHAIR.png" alt="A woman sitting in a cozy living room reading a book." class="w-full h-full object-contain">
     </div>
+
+    <!-- The small, hidden video player and control button -->
+    <div id="player-container" class="fixed top-0 left-0">
+        <button id="play-button">▶</button>
+        <div id="player"></div>
+    </div>
+    
+    <script>
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var isPlaying = false;
+        var playButton = document.getElementById('play-button');
+
+        // This function creates an <iframe> (and YouTube player) after the API code downloads.
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: 'Xp2f-j5JzXw', // The YouTube video ID for "2Pac - So Many Tears (Instrumental)"
+                playerVars: {
+                    'controls': 0,
+                    'autoplay': 0, // Autoplay is handled by the button click due to browser policy
+                    'loop': 1,
+                    'playlist': 'Xp2f-j5JzXw'
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Set volume to 50%
+            player.setVolume(50);
+        }
+
+        playButton.addEventListener('click', function() {
+            if (isPlaying) {
+                player.pauseVideo();
+                playButton.innerText = '▶';
+            } else {
+                player.playVideo();
+                playButton.innerText = '⏸';
+            }
+            isPlaying = !isPlaying;
+        });
+
+    </script>
 </body>
 </html>
-
