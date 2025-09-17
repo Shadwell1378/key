@@ -22,8 +22,8 @@
         /* --- Full-Screen Background Image --- */
         body {
             background-image: url('key.png'); /* IMPORTANT: Your cropped image here */
-            background-size: cover; /* Stretches image to cover entire viewport */
-            background-position: center; /* Centers the image */
+            background-size: contain; /* Adjusted: Scales image to fit fully within the screen */
+            background-position: center center; /* Adjusted: Centers both horizontally and vertically */
             background-repeat: no-repeat; /* Prevents image from repeating */
             background-attachment: fixed; /* Keeps image fixed during any potential scrolling (though we have overflow:hidden) */
         }
@@ -152,5 +152,3 @@
 
 </body>
 </html>
-
-
