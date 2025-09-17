@@ -1,15 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unlocked Mystery</title>
+    <style>
+        /* --- Global Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            <img src="key.png" height=3000 width=1700>
-         
-        </div>
-    </section>
+        html, body {
+            height: 100%; /* Ensures the body takes full viewport height */
+            overflow: hidden; /* Prevents unwanted scrollbars */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000; /* Fallback background, though image will cover */
+        }
 
-    <script src="script.js"></script>
+        /* --- Full-Screen Background Image --- */
+        body {
+            background-image: url('key.png'); /* IMPORTANT: Your cropped image here */
+            background-size: cover; /* Stretches image to cover entire viewport */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents image from repeating */
+            background-attachment: fixed; /* Keeps image fixed during any potential scrolling (though we have overflow:hidden) */
+        }
+
+        /* --- The Mysterious Smokey Pulsating Overlay --- */
+        .overlay {
+            position: absolute; /* Positions relative to the body/viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 255, 200, 0.1) 0%,   /* Center glow, slightly yellowish, more opaque */
+                rgba(0, 0, 0, 0.4) 30%,        /* Darker, more opaque smoke close to center */
+                rgba(0, 0, 0, 0.7) 70%,        /* Heavier smoke towards edges */
+                rgba(0, 0, 0, 0.9) 100%         /* Almost fully opaque black at edges */
+            );
+            opacity: 0.9; /* Base opacity for the whole overlay */
+            pointer-events: none; /* Allows clicks to pass through to elements beneath if any */
+            animation:
+                smokeyPulsate 8s infinite alternate ease-in-out, /* Main smoke pulsation */
+                lightFlicker 4s infinite alternate ease-in-out; /* Subtle light flicker */
+        }
+
+        /* --- Keyframe Animations for the Overlay --- */
+
+        /* Animation for general "smokey" pulsation and slight color shift */
+        @keyframes smokeyPulsate {
+            0% {
+                opacity: 0.85;
+                transform: scale(1);
+                background: radial-gradient(
+                    circle at center,
+                    rgba(255, 255, 200, 0.15) 0%,
+                    rgba(0, 0, 0, 0.35) 35%,
+                    rgba(0, 0, 0, 0.65) 75%,
+                    rgba(0, 0, 0, 0.85) 100%
+                );
+            }
+            50% {
+                opacity: 0.95;
+                transform: scale(1.02); /* Slight scale for breathing effect */
+                background: radial-gradient(
+                    circle at center,
+                    rgba(255, 255, 220, 0.25) 0%, /* Brighter center */
+                    rgba(0, 0, 0, 0.45) 30%,
+                    rgba(0, 0, 0, 0.75) 60%,
+                    rgba(0, 0, 0, 0.9) 100%
+                );
+            }
+            100% {
+                opacity: 0.85;
+                transform: scale(1);
+                background: radial-gradient(
+                    circle at center,
+                    rgba(255, 255, 200, 0.15) 0%,
+                    rgba(0, 0, 0, 0.35) 35%,
+                    rgba(0, 0, 0, 0.65) 75%,
+                    rgba(0, 0, 0, 0.85) 100%
+                );
+            }
+        }
+
+        /* Animation for a more subtle light flicker effect within the overlay */
+        @keyframes lightFlicker {
+            0%, 100% {
+                filter: brightness(1);
+                backdrop-filter: brightness(1); /* Affects background behind the overlay */
+            }
+            25% {
+                filter: brightness(1.05); /* Slight brightening */
+                backdrop-filter: brightness(1.03);
+            }
+            50% {
+                filter: brightness(0.98); /* Slight dimming */
+                backdrop-filter: brightness(0.98);
+            }
+            75% {
+                filter: brightness(1.04);
+                backdrop-filter: brightness(1.02);
+            }
+        }
+
+
+        /* --- Optional: Add subtle smoke elements with pseudo-elements for more depth --- */
+        .overlay::before,
+        .overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 70%); /* Subtle white cloud effect */
+            animation:
+                smokeMovement 12s infinite linear alternate,
+                smokeFade 6s infinite alternate ease-in-out;
+        }
+
+        .overlay::after {
+            background-image: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 80%); /* Another cloud for layering */
+            animation:
+                smokeMovement 15s infinite reverse linear alternate,
+                smokeFade 8s infinite alternate ease-in-out;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+
+        @keyframes smokeMovement {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10px, 10px) scale(1.05); }
+        }
+
+        @keyframes smokeFade {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.9; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
 </body>
 </html>
-
-
 
 
