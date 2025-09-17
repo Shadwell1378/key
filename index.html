@@ -40,13 +40,13 @@
                 rgba(255, 255, 200, 0.1) 0%,   /* Center glow, slightly yellowish, more opaque */
                 rgba(0, 0, 0, 0.4) 30%,        /* Darker, more opaque smoke close to center */
                 rgba(0, 0, 0, 0.7) 70%,        /* Heavier smoke towards edges */
-                rgba(0, 0, 0, 0.9) 100%         /* Almost fully opaque black at edges */
+                rgba(255, 0, 0, 0.9) 100%         /* Almost fully opaque black at edges */
             );
-            opacity: 0.9; /* Base opacity for the whole overlay */
+            opacity: 4.9; /* Base opacity for the whole overlay */
             pointer-events: none; /* Allows clicks to pass through to elements beneath if any */
             animation:
                 smokeyPulsate 8s infinite alternate ease-in-out, /* Main smoke pulsation */
-                lightFlicker 4s infinite alternate ease-in-out; /* Subtle light flicker */
+                lightFlicker 1s infinite alternate ease-in-out; /* Subtle light flicker */
         }
 
         /* --- Keyframe Animations for the Overlay --- */
@@ -72,7 +72,7 @@
                     rgba(255, 255, 220, 0.25) 0%, /* Brighter center */
                     rgba(0, 0, 0, 0.45) 30%,
                     rgba(0, 0, 0, 0.75) 60%,
-                    rgba(0, 0, 0, 0.9) 100%
+                    rgba(255, 0, 0, 0.9) 100%
                 );
             }
             100% {
@@ -152,3 +152,4 @@
 
 </body>
 </html>
+
