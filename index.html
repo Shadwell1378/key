@@ -17,12 +17,20 @@
         .animate-gentle-pulse {
             animation: gentle-pulse 6s ease-in-out infinite;
         }
+
+        .image-container {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen w-screen overflow-hidden">
     <div class="flex items-center justify-center p-4">
-        <div class="relative w-full h-full max-w-5xl rounded-lg overflow-hidden shadow-2xl animate-gentle-pulse">
-            <img src="KTCHAIR.png" alt="A woman sitting in a cozy living room reading a book." class="w-full h-full object-contain">
+        <div class="relative w-full h-full max-w-5xl rounded-lg overflow-hidden shadow-2xl animate-gentle-pulse image-container">
+            <img src="KTCHAIR.jpg" alt="A woman sitting in a cozy living room reading a book." class="w-full h-full object-contain">
         </div>
     </div>
 </body>
